@@ -1,60 +1,32 @@
 const express = require("express");
-const userServicesDB = require("../services/userServicesDB");
-const userServicesJS = require("../services/userServicesJS");
+const userServices = require("../services/userServices");
 
 const router = express.Router();
 
 // Get all users
-// - Mongo DB
-router.route("/db/").get(async (req, res) => {
-  const users = await userServicesDB.getAllUsers();
-  return res.json(users);
-});
-
-// - JSON file
-router.route("/js/").get(async (req, res) => {
-  const users = await userServicesJS.getAllUsers();
+router.route("/").get(async (req, res) => {
+  const users = await userServices.getAllUsers();
   return res.json(users);
 });
 
 // Get user by Id / Username
-// - Mongo DB
-router.route("/db/:id").get(async (req, res) => {
+router.route("/:id").get(async (req, res) => {
   const id = req.params.id;
-  const user = await userServicesDB.getUserById(id);
+  const user = await userServices.getUserById(id);
   return res.json(user);
 });
 
-router.route("/db/un/:username").get(async (req, res) => {
+router.route("/un/:username").get(async (req, res) => {
   const username = req.params.username;
-  const user = await userServicesDB.getUserByUsername(username);
-  return res.json(user);
-});
-
-// JSON file -
-router.route("/js/:id").get(async (req, res) => {
-  const id = req.params.id;
-  const user = await userServicesJS.getUserById(id);
+  const user = await userServices.getUserByUsername(username);
   return res.json(user);
 });
 
 // Post
-// - Mongo DB
-router.route("/db/").post(async (req, res) => {
+router.route("/").post(async (req, res) => {
   const newUser = req.body;
   try {
-    const data = await userServicesDB.addUser(newUser);
-    return res.json(data);
-  } catch (error) {
-    return res.json(error);
-  }
-});
-
-// - JSON file
-router.route("/js/").post(async (req, res) => {
-  const newUser = req.body;
-  try {
-    const data = await userServicesJS.addUser(newUser);
+    const data = await userServices.addUser(newUser);
     return res.json(data);
   } catch (error) {
     return res.json(error);
@@ -62,24 +34,11 @@ router.route("/js/").post(async (req, res) => {
 });
 
 // Put
-// - Mongo DB
-router.route("/db/:id").put(async (req, res) => {
+router.route("/:id").put(async (req, res) => {
   const id = req.params.id;
   const changeUser = req.body;
   try {
-    const data = await userServicesDB.updateUser(id, changeUser);
-    return res.json(data);
-  } catch (error) {
-    return res.json(error);
-  }
-});
-
-// - JSON file
-router.route("/js/:id").put(async (req, res) => {
-  const id = req.params.id;
-  const changeUser = req.body;
-  try {
-    const data = await userServicesJS.updateUser(id, changeUser);
+    const data = await userServices.updateUser(id, changeUser);
     return res.json(data);
   } catch (error) {
     return res.json(error);
@@ -87,17 +46,9 @@ router.route("/js/:id").put(async (req, res) => {
 });
 
 // Delete
-// - Mongo DB
-router.route("/db/:id").delete(async (req, res) => {
+router.route("/:id").delete(async (req, res) => {
   const id = req.params.id;
-  const data = await userServicesDB.deleteUser(id);
-  return res.json(data);
-});
-
-// - JSON file
-router.route("/js/:id").delete(async (req, res) => {
-  const id = req.params.id;
-  const data = await userServicesJS.deleteUser(id);
+  const data = await userServices.deleteUser(id);
   return res.json(data);
 });
 

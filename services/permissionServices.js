@@ -1,10 +1,9 @@
-const jsonfile = require("jsonfile");
-const file = "./files/Permissions.json";
+const Permission = require("../models/permissionModel");
 
 // Get
 const getAllPermissions = () => {
   return new Promise((res, rej) => {
-    jsonfile.readFile(file, (err, permissions) => {
+    Permission.find({}, (err, permissions) => {
       if (err) {
         rej(err);
       } else {
@@ -16,14 +15,11 @@ const getAllPermissions = () => {
 
 const getPermissionById = (id) => {
   return new Promise((res, rej) => {
-    jsonfile.readFile(file, (err, permissions) => {
+    Permission.find({ userId: id }, (err, permissions) => {
       if (err) {
         rej(err);
       } else {
-        const permission = permissions.find(
-          (permission) => permission.id === id
-        );
-        res(permission);
+        res(permissions[0].permissions);
       }
     });
   });
@@ -32,15 +28,13 @@ const getPermissionById = (id) => {
 // Post
 const addPermission = (newPermission) => {
   return new Promise((res, rej) => {
-    getAllPermissions().then((permissions) => {
-      permissions.push(newPermission);
-      jsonfile.writeFile(file, permissions, (err) => {
-        if (err) {
-          rej(err);
-        } else {
-          res("permission added successfully");
-        }
-      });
+    const permission = new Permission(newPermission);
+    permission.save((err) => {
+      if (err) {
+        rej(err);
+      } else {
+        res("permission added successfully");
+      }
     });
   });
 };
@@ -48,39 +42,36 @@ const addPermission = (newPermission) => {
 // Put
 const updatePermission = (id, changePermission) => {
   return new Promise((res, rej) => {
-    getAllPermissions().then((permissions) => {
-      const index = permissions.findIndex((permission) => permission.id === id);
-      permissions[index] = changePermission;
-      jsonfile.writeFile(file, permissions, (err) => {
+    Permission.findOneAndUpdate(
+      { userId: id },
+      { permissions: changePermission.permissions },
+      (err) => {
         if (err) {
           rej(err);
         } else {
-          res("permission updated successfully");
+          res("permissions updated successfully");
         }
-      });
-    });
+      }
+    );
   });
 };
 
 // Delete
 const deletePermission = (id) => {
   return new Promise((res, rej) => {
-    getAllPermissions().then((permissions) => {
-      permissions = permissions.filter((permission) => permission.id !== id);
-      jsonfile.writeFile(file, permissions, (err) => {
-        if (err) {
-          rej(err);
-        } else {
-          res("permission deleted successfully");
-        }
-      });
+    Permission.findOneAndDelete({ userId: id }, (err) => {
+      if (err) {
+        rej(err);
+      } else {
+        res("permission deleted successfully");
+      }
     });
   });
 };
 
 const deleteAllPermissions = () => {
   return new Promise((res, rej) => {
-    jsonfile.writeFile(file, [], (err) => {
+    Permission.deleteMany({}, (err) => {
       if (err) {
         rej(err);
       } else {

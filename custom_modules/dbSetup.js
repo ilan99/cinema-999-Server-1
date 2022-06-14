@@ -1,40 +1,32 @@
-const userServicesDB = require("../services/userServicesDB");
-const userServicesJS = require("../services/userServicesJS");
+const userServices = require("../services/userServices");
 const permissionServices = require("../services/permissionServices");
 
 const initData = () => {
-  userServicesDB.deleteAllUsers();
-  userServicesJS.deleteAllUsers();
+  userServices.deleteAllUsers();
   permissionServices.deleteAllPermissions();
 };
 
 const loadAdmin = () => {
   const date = new Date();
 
-  // Users - DB
+  // Users
   const userBL = {
     username: "Admin",
     password: "fullstack",
+    firstName: "Ilan",
+    lastName: "Samara",
+    createDate: date.toISOString().split("T")[0],
+    sessionTimeOut: 60,
   };
 
-  userServicesDB.addUser(userBL).then(() => {
-    userServicesDB.getAllUsers().then((res) => {
+  userServices.addUser(userBL).then(() => {
+    userServices.getAllUsers().then((res) => {
       const users = [...res];
       const adminId = users[0]._id;
 
-      // Users - JSON
-      const userJSON = {
-        id: adminId,
-        firstName: "Ilan",
-        lastName: "Samara",
-        createDate: date.toISOString().split("T")[0],
-        sessionTimeOut: 60,
-      };
-      userServicesJS.addUser(userJSON);
-
-      // Permissions - JSON
+      // Permissions
       permission = {
-        id: adminId,
+        userId: adminId,
         permissions: [
           "View Subscriptions",
           "Create Subscriptions",
