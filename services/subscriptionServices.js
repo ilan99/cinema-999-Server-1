@@ -1,6 +1,6 @@
 const axios = require("axios");
 // const url = "http://localhost:8001/subscriptions";
-const url = "http://subscriptions-999.herokuapp.com/subscriptions";
+const url = "http://subscriptions-rg3l.onrender.com/subscriptions";
 
 // Get
 const getAllSubscriptions = () => {

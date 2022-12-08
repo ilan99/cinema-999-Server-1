@@ -1,6 +1,6 @@
 const axios = require("axios");
 // const url = "http://localhost:8001/members";
-const url = "http://subscriptions-999.herokuapp.com/members";
+const url = "http://subscriptions-rg3l.onrender.com/members";
 
 // Get
 const getAllMembers = () => {
