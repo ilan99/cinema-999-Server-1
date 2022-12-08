@@ -3,8 +3,8 @@ const axios = require("axios");
 const url = "http://subscriptions-rg3l.onrender.com/movies";
 
 // Initial request
-const initialRequest = () => {
-  axios.get(`${url}/start`);
+const initialRequest = async () => {
+  await axios.get(`${url}/start`);
 };
 
 // Get
