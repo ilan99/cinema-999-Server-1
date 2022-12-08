@@ -7,6 +7,7 @@ const router = express.Router();
 router.route("/start").get((req, res) => {
   console.log("Initial request ...");
   movieServices.initialRequest();
+  res.send("ok");
 });
 
 // Get all movies
