@@ -4,8 +4,9 @@ const movieServices = require("../services/movieServices");
 const router = express.Router();
 
 // Initial request
-router.route("/start").get(async (req, res) => {
+router.route("/start").get((req, res) => {
   console.log("Initial request ...");
+  movieServices.initialRequest();
 });
 
 // Get all movies

@@ -2,6 +2,11 @@ const axios = require("axios");
 // const url = "http://localhost:8001/movies";
 const url = "http://subscriptions-rg3l.onrender.com/movies";
 
+// Initial request
+const initialRequest = () => {
+  axios.get(`${url}/start`);
+};
+
 // Get
 const getAllMovies = () => {
   return axios.get(url);
@@ -27,6 +32,7 @@ const deleteMovie = (id) => {
 };
 
 module.exports = {
+  initialRequest,
   getAllMovies,
   getMovieById,
   addMovie,
