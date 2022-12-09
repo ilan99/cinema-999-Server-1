@@ -5,14 +5,14 @@ const router = express.Router();
 
 // Initial request
 router.route("/start").get((req, res) => {
-  console.log("Initial request ...");
+  console.log("Initial request : ", req.headers);
   movieServices.initialRequest();
   res.send("ok");
 });
 
 // Get all movies
 router.route("/").get(async (req, res) => {
-  console.log("New request: ", req.headers);
+  console.log("=> Movies request");
   const { data: movies } = await movieServices.getAllMovies();
   return res.json(movies);
 });

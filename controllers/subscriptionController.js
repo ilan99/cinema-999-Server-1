@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Get all subscriptions
 router.route("/").get(async (req, res) => {
+  console.log("=> Subscriptions request");
   const { data: subscriptions } =
     await subscriptionServices.getAllSubscriptions();
   return res.json(subscriptions);

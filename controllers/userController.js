@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Get all users
 router.route("/").get(async (req, res) => {
+  console.log("=> Users request");
   const users = await userServices.getAllUsers();
   return res.json(users);
 });
