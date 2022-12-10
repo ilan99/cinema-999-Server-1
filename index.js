@@ -32,5 +32,5 @@ app.use("/movies", movieController);
 app.use("/subscriptions", subscriptionController);
 
 app.listen(process.env.PORT || port, host, () =>
-  console.log("Render server is on")
+  console.log("Cinema server is on ...")
 );

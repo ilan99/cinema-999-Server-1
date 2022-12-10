@@ -1,6 +1,6 @@
 const axios = require("axios");
 // const url = "http://localhost:8001/movies";
-const url = "http://subscriptions-rg3l.onrender.com/movies";
+const url = "http://subscriptions-999.up.railway.app/movies";
 
 // Initial request
 const initialRequest = () => {
