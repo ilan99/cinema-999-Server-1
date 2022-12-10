@@ -1,6 +1,6 @@
 const axios = require("axios");
 // const url = "http://localhost:8001/movies";
-const url = "http://subscriptions-999.up.railway.app/movies";
+const url = "http://subscriptions-99.up.railway.app/movies";
 
 // Initial request
 const initialRequest = () => {

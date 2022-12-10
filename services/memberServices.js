@@ -1,6 +1,6 @@
 const axios = require("axios");
 // const url = "http://localhost:8001/members";
-const url = "http://subscriptions-999.up.railway.app/members";
+const url = "http://subscriptions-99.up.railway.app/members";
 
 // Get
 const getAllMembers = () => {
