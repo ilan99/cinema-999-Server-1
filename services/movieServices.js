@@ -1,6 +1,6 @@
 const axios = require("axios");
 // const url = "http://localhost:8001/movies";
-const url = "http://subscriptions-999.cyclic.app/movies";
+const url = "https://subscriptions-999.cyclic.app/movies";
 
 // Initial request
 const initialRequest = () => {

@@ -1,6 +1,6 @@
 const axios = require("axios");
 // const url = "http://localhost:8001/members";
-const url = "http://subscriptions-999.cyclic.app/members";
+const url = "https://subscriptions-999.cyclic.app/members";
 
 // Get
 const getAllMembers = () => {
